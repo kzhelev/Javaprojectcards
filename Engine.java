@@ -53,6 +53,7 @@ public class Engine {
             }
         } else {
             System.out.println("You will be fist!");
+            System.out.println("Choose a card:");
             humansPlayerDeck.printDeck();
             indexHuman = Integer.parseInt(scanner.nextLine());
             Deck.Card cardHuman = humansPlayerDeck.cardDraw(indexHuman);
@@ -60,10 +61,16 @@ public class Engine {
             int compCardIndex = 0;
             boolean computerHasABiggerCard = false;
             for (int i = 0; i < computersDeck.cards.size(); i++) {
-                if (cardHuman.cardRank < computersDeck.cards.get(i).cardRank) {
+                if (cardHuman.rankNumber < computersDeck.cards.get(i).rankNumber) {
                     compCardIndex = i;
                     computerHasABiggerCard = true;
                     break;
+                } else if (cardHuman.rankNumber == computersDeck.cards.get(i).rankNumber) {
+                        if (cardHuman.cardRank < computersDeck.cards.get(i).colorRank) {
+                            compCardIndex = i;
+                            computerHasABiggerCard = true;
+                            break;
+                        }
                 }
             }
             if (!computerHasABiggerCard) {
@@ -71,7 +78,6 @@ public class Engine {
             }
             Deck.Card cardComp = computersDeck.cardDraw(compCardIndex);
             System.out.println("Computer gave: " + cardComp.rank + " of " + cardComp.color);
-            System.out.println("Choose a card:");
             int win = Deck.compareTwoCards(cardComp, cardHuman);
             if (win == 1) {
                 System.out.println("Computer wins this round!");
@@ -111,6 +117,7 @@ public class Engine {
                 }
             } else {
                 System.out.println("You will be fist this round!");
+                System.out.println("Choose a card:");
                 humansPlayerDeck.printDeck();
                 indexHuman = Integer.parseInt(scanner.nextLine());
                 Deck.Card cardHuman = humansPlayerDeck.cardDraw(indexHuman);
@@ -129,7 +136,6 @@ public class Engine {
                 }
                 Deck.Card cardComp = computersDeck.cardDraw(compCardIndex);
                 System.out.println("Computer gave: " + cardComp.rank + " of " + cardComp.color);
-                System.out.println("Choose a card:");
                 int win = Deck.compareTwoCards(cardComp, cardHuman);
                 if (win == 1) {
                     System.out.println("Computer wins this round!");

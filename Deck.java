@@ -60,8 +60,14 @@ public class Deck {
     public static Integer compareTwoCards(Card card1, Card card2) {
         if (card1.rankNumber > card2.rankNumber) {
             return 1;
-        } else {
+        } else if (card1.rankNumber < card2.rankNumber){
             return 2;
+        } else {
+            if (card1.colorRank > card2.colorRank) {
+                return 1;
+            } else {
+                return 2;
+            }
         }
     }
 
